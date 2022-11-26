@@ -19,27 +19,64 @@ public class Burrice_artificial {
     public static void main(String[] args) {
         // TODO code application logic here
         boneca boneco = new boneca();
-        boneco.pos_atual.setX(4);
-        boneco.pos_atual.setY(2);
+        boneco.pos_atual.setX(3);
+        boneco.pos_atual.setY(4); 
         
         boolean parou = false;
         labirinto lab = new labirinto();
         
-        for(int i=0;i<5;i++){
-            for(int j=0;j<5;j++){
-                System.out.print(lab.posicoes[i][j]);
-            }
-            System.out.println("");
-        }
+        //for(int i=0;i<5;i++){
+         //   for(int j=0;j<5;j++){
+        //        System.out.print(lab.posicoes[i][j]);
+         //   }
+         //   System.out.println("");
+        //}
                 
-      System.out.println(lab.posicoes[4][2]);
-        while(parou==false){
-            parou = boneco.decisao(lab);
-            System.out.println("X atual = " + boneco.pos_atual.getX() + " Y atual = "+boneco.pos_atual.getY());
-            //boneco.pos_atual.setX(boneco.cha.peek().getX());
+      System.out.print(lab.posicoes[0][0]+" ");
+      System.out.print(lab.posicoes[0][1]+" ");
+      System.out.print(lab.posicoes[0][2]+" ");
+      System.out.print(lab.posicoes[0][3]+" ");
+      System.out.print(lab.posicoes[0][4]+" ");
+      System.out.println("");
+      
+      System.out.print(lab.posicoes[1][0]+" ");
+      System.out.print(lab.posicoes[1][1]+" ");
+      System.out.print(lab.posicoes[1][2]+" ");
+      System.out.print(lab.posicoes[1][3]+" ");
+      System.out.print(lab.posicoes[1][4]+" ");
+      System.out.println("");
+      
+      System.out.print(lab.posicoes[2][0]+" ");
+      System.out.print(lab.posicoes[2][1]+" ");
+      System.out.print(lab.posicoes[2][2]+" ");
+      System.out.print(lab.posicoes[2][3]+" ");
+      System.out.print(lab.posicoes[2][4]+" ");
+      System.out.println("");
+      
+      System.out.print(lab.posicoes[3][0]+" ");
+      System.out.print(lab.posicoes[3][1]+" ");
+      System.out.print(lab.posicoes[3][2]+" ");
+      System.out.print(lab.posicoes[3][3]+" ");
+      System.out.print(lab.posicoes[3][4]+" ");
+      System.out.println("");
+      
+      System.out.print(lab.posicoes[4][0]+" ");
+      System.out.print(lab.posicoes[4][1]+" ");
+      System.out.print(lab.posicoes[4][2]+" ");
+      System.out.print(lab.posicoes[4][3]+" ");
+      System.out.print(lab.posicoes[4][4]+" ");
+      System.out.println("");
+      
+      
+      
+      
+      
+            boneco.decisao(lab,3);
+            
+           // boneco.pos_atual.setX(boneco.cha.peek().getX());
            // boneco.pos_atual.setY(boneco.cha.peek().getY());
             
-        }
+        
         
     }
     
