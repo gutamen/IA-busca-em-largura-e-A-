@@ -66,7 +66,7 @@ public class boneca {
             posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
             this.cha.push(newpos);
             this.pos_atual.setX(this.pos_atual.getX()-1);
-            System.out.println("X atual = " + this.cha.peek().getX() + " Y atual = " + this.cha.peek().getY());
+            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
             
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
