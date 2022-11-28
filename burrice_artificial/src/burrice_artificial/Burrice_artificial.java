@@ -4,6 +4,7 @@
  */
 package burrice_artificial;
 
+import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,53 +26,22 @@ public class Burrice_artificial {
         boolean parou = false;
         labirinto lab = new labirinto();
         
-        //for(int i=0;i<5;i++){
-         //   for(int j=0;j<5;j++){
-        //        System.out.print(lab.posicoes[i][j]);
-         //   }
-         //   System.out.println("");
-        //}
+        for (int[] posicoe : lab.posicoes) {
+            for (int j = 0; j<lab.posicoes[0].length; j++) {
+                System.out.print("   " + posicoe[j]);
+            }
+            System.out.println("");
+        }
                 
-      System.out.print(lab.posicoes[0][0]+" ");
-      System.out.print(lab.posicoes[0][1]+" ");
-      System.out.print(lab.posicoes[0][2]+" ");
-      System.out.print(lab.posicoes[0][3]+" ");
-      System.out.print(lab.posicoes[0][4]+" ");
-      System.out.println("");
+        
       
-      System.out.print(lab.posicoes[1][0]+" ");
-      System.out.print(lab.posicoes[1][1]+" ");
-      System.out.print(lab.posicoes[1][2]+" ");
-      System.out.print(lab.posicoes[1][3]+" ");
-      System.out.print(lab.posicoes[1][4]+" ");
-      System.out.println("");
+     
+           Stack<posicao> cha;
       
-      System.out.print(lab.posicoes[2][0]+" ");
-      System.out.print(lab.posicoes[2][1]+" ");
-      System.out.print(lab.posicoes[2][2]+" ");
-      System.out.print(lab.posicoes[2][3]+" ");
-      System.out.print(lab.posicoes[2][4]+" ");
-      System.out.println("");
-      
-      System.out.print(lab.posicoes[3][0]+" ");
-      System.out.print(lab.posicoes[3][1]+" ");
-      System.out.print(lab.posicoes[3][2]+" ");
-      System.out.print(lab.posicoes[3][3]+" ");
-      System.out.print(lab.posicoes[3][4]+" ");
-      System.out.println("");
-      
-      System.out.print(lab.posicoes[4][0]+" ");
-      System.out.print(lab.posicoes[4][1]+" ");
-      System.out.print(lab.posicoes[4][2]+" ");
-      System.out.print(lab.posicoes[4][3]+" ");
-      System.out.print(lab.posicoes[4][4]+" ");
-      System.out.println("");
-      
-      
-      
-      
-      
-            boneco.decisao(lab,3);
+           cha = boneco.decisao(lab,3,-1);
+           
+           for (int i = 0; i <cha.size(); i ++)
+            System.out.println("X = "+cha.get(i).getX()+ " " + "Y = "+cha.get(i).getY());
             
            // boneco.pos_atual.setX(boneco.cha.peek().getX());
            // boneco.pos_atual.setY(boneco.cha.peek().getY());

@@ -24,8 +24,8 @@ public class boneca {
     public Stack<posicao> cha;
     
     public boneca(){
-        this.cha = new Stack();
-        this.pos_atual = new posicao();
+        this.cha = new Stack<>();
+        this.pos_atual = new posicao(0,0);
         
     }
  
@@ -35,40 +35,76 @@ public class boneca {
         return quantos_andou;
     }
     
-    void decisao(labirinto lab,int last){
+    Stack decisao(labirinto lab,int last, int caminhos){
+        int multiploCaminho = caminhos;
         
-        if((lab.posicoes[this.pos_atual.getY()][this.pos_atual.getX()+1]!=1)&&last!=0){
-            this.cha.push(this.pos_atual);
+        /*int possibilidades = 0;
+        if (lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) == 0 && last!=0 )
+            possibilidades++;
+        if (lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) == 0 && last!=2)
+            possibilidades++;
+        if (lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) == 0 && last!=3)
+            possibilidades++;
+        if (lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) == 0 && last!=1)
+            possibilidades++;*/
+        
+        
+        
+        if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
+            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            this.cha.push(newpos);
             this.pos_atual.setX(this.pos_atual.getX()+1);
-            System.out.println("X atual = " + this.cha.peek().getX() + " Y atual = " + this.cha.peek().getY());
-            decisao(lab,2);
+            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
+            
+            decisao(lab,2,multiploCaminho);
         }
         
-        if((lab.posicoes[this.pos_atual.getY()][this.pos_atual.getX()-1]!=1)&&last!=2){
-            this.cha.push(this.pos_atual);
+        if((lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) != 1)&&last!=2){
+            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            this.cha.push(newpos);
             this.pos_atual.setX(this.pos_atual.getX()-1);
             System.out.println("X atual = " + this.cha.peek().getX() + " Y atual = " + this.cha.peek().getY());
-            decisao(lab,0);
+            
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
+            
+            
+            decisao(lab,0,multiploCaminho);
         }
         
-        if((lab.posicoes[this.pos_atual.getY()-1][this.pos_atual.getX()]!=1)&&last!=1){
-            this.cha.push(this.pos_atual);
+        if((lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) !=  1) && last!=3){
+            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            this.cha.push(newpos);
             this.pos_atual.setY(this.pos_atual.getY()-1);
-            System.out.println("X atual = " + this.cha.peek().getX() + " Y atual = " + this.cha.peek().getY());
-            decisao(lab,3);
+            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
+           
+            decisao(lab,1,multiploCaminho);
         }
-        if((lab.posicoes[this.pos_atual.getY()+1][this.pos_atual.getX()]!=1)&&last!=3){
-            this.cha.push(this.pos_atual);
-            this.pos_atual.setY(this.pos_atual.getY()+1);
-            System.out.println("X atual = " + this.cha.peek().getX() + " Y atual = " + this.cha.peek().getY());
-            decisao(lab,1);
+        
+        if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
+            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            this.cha.push(newpos);
+            this.pos_atual.setY(this.pos_atual.getY()-1);
+            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
+            
+            decisao(lab,3,multiploCaminho);
         }
                    
+        if(lab.pegaValorPos(pos_atual) != 2){
+            this.pos_atual = this.cha.pop(); 
+            System.out.println("popou X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+        }
         
-        this.cha.pop(); 
-        System.out.println("popou X atual = " + this.cha.peek().getX() + " Y atual = " + this.cha.peek().getY());
-        
-                              
+        return cha;           
     }  
 }
     

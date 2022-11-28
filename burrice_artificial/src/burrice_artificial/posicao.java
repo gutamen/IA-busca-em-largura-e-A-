@@ -10,6 +10,10 @@ package burrice_artificial;
  */
 public class posicao {
 
+    public posicao(int _y, int _x){
+        this.y = _y;
+        this.x = _x;
+    }
     public int getX() {
         return x;
     }
