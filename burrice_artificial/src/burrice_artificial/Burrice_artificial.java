@@ -4,8 +4,9 @@
  */
 package burrice_artificial;
 
+import java.util.List;
 import java.util.Stack;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  *
@@ -21,9 +22,10 @@ public class Burrice_artificial {
         // TODO code application logic here
         boneca boneco = new boneca();
         boneco.pos_atual.setX(3);
-        boneco.pos_atual.setY(4); 
+        boneco.pos_atual.setY(4);
+
         
-        boolean parou = false;
+        
         labirinto lab = new labirinto();
         
         for (int[] posicoe : lab.posicoes) {
@@ -36,9 +38,10 @@ public class Burrice_artificial {
         
       
      
-           Stack<posicao> cha;
+           //Stack<posicao> cha;
+           List<posistrela> cha;
       
-           cha = boneco.decisao(lab,3,-1);
+           cha = boneco.decisao(lab,boneco.pos_atual,new posicao(0,3));
            
            for (int i = 0; i <cha.size(); i ++)
             System.out.println("X = "+cha.get(i).getX()+ " " + "Y = "+cha.get(i).getY());

@@ -4,6 +4,8 @@
  */
 package burrice_artificial;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -35,21 +37,8 @@ public class boneca {
         return quantos_andou;
     }
     
-    Stack decisao(labirinto lab,int last, int caminhos){
-        int multiploCaminho = caminhos;
-        
-        /*int possibilidades = 0;
-        if (lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) == 0 && last!=0 )
-            possibilidades++;
-        if (lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) == 0 && last!=2)
-            possibilidades++;
-        if (lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) == 0 && last!=3)
-            possibilidades++;
-        if (lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) == 0 && last!=1)
-            possibilidades++;*/
-        
-        
-        
+    Stack decisao(labirinto lab,int last){
+
         if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
             posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
             this.cha.push(newpos);
@@ -59,7 +48,7 @@ public class boneca {
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
             
-            decisao(lab,2,multiploCaminho);
+            decisao(lab,2);
         }
         
         if((lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) != 1)&&last!=2){
@@ -72,7 +61,7 @@ public class boneca {
                 return cha;
             
             
-            decisao(lab,0,multiploCaminho);
+            decisao(lab,0);
         }
         
         if((lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) !=  1) && last!=3){
@@ -84,7 +73,7 @@ public class boneca {
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
            
-            decisao(lab,1,multiploCaminho);
+            decisao(lab,1);
         }
         
         if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
@@ -96,7 +85,7 @@ public class boneca {
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
             
-            decisao(lab,3,multiploCaminho);
+            decisao(lab,3);
         }
                    
         if(lab.pegaValorPos(pos_atual) != 2){
@@ -105,7 +94,60 @@ public class boneca {
         }
         
         return cha;           
-    }  
+    }
+    
+    List decisao(labirinto lab,posicao inicial,posicao _final){
+        posistrela comesso = new posistrela(null,inicial);
+        int i = 0;
+        
+        comesso.calCusto(_final);
+        List<posistrela> percurso = new ArrayList<posistrela>();
+        
+        percurso.add(comesso);
+        
+        while(true){
+            posistrela um;
+            posistrela dois;
+            posistrela tres;
+            posistrela cuatro;
+            
+            if((lab.pegaValorPos(lab.pegaPosAddX(percurso.get(i).getPos())) != 1)){
+                um = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+                um.calCusto(_final);
+                percurso.add(um);
+            }
+            
+            if((lab.pegaValorPos(lab.pegaPosSubX(percurso.get(i).getPos())) != 1)){
+                dois = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+                dois.calCusto(_final);
+                percurso.add(dois);
+            }
+            
+            if((lab.pegaValorPos(lab.pegaPosAddY(percurso.get(i).getPos())) != 1)){
+                tres = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+                tres.calCusto(_final);
+                percurso.add(tres);
+            }
+            
+            if((lab.pegaValorPos(lab.pegaPosSubY(percurso.get(i).getPos())) != 1)){
+                cuatro = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+                cuatro.calCusto(_final);
+                percurso.add(cuatro);
+            }
+            
+            for(int k = 0;k < percurso.size();k++){
+                double menor = Double.MAX_VALUE;
+                if(percurso.get(i).getCusto()<menor){
+                    i = k;
+                }
+            }
+            
+            if(percurso.get(i).getCusto()==0)
+                break;
+            
+        }
+        return percurso;
+    }
 }
     
     

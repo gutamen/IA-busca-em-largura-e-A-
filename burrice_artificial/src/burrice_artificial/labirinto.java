@@ -18,11 +18,11 @@ public class labirinto {
     int pegaValorPos(posicao pos){
        
         if(pos == null)
-            return -1;
+            return 1;
         if( pos.getX() >= this.posicoes[0].length || pos.getX()<0)
-            return -1;
+            return 1;
         else if( pos.getY() >= this.posicoes.length || pos.getY()<0)
-            return -1;
+            return 1;
         
         /*System.out.println(pos.getY()+"  "+pos.getX());
         System.out.println(this.posicoes[pos.getY()][pos.getX()]);*/
