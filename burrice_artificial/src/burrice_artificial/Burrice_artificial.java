@@ -38,16 +38,26 @@ public class Burrice_artificial {
         
       
      
-           //Stack<posicao> cha;
-           List<posistrela> cha;
-      
-           cha = boneco.decisao(lab,boneco.pos_atual,new posicao(0,3));
+           Stack<posicao> cha;
+           cha = boneco.decisao(lab,3);
+           while(!cha.empty()){
+               System.out.println("caminho X = " + cha.peek().getX() +" Y = " + cha.peek().getY());
+               cha.pop();
+           }
            
+           
+           /*List<posistrela> cha;
+           cha = boneco.decisao(lab, 3 ,boneco.pos_atual,new posicao(0,4));
+           posistrela pronto = new posistrela();
            for (int i = 0; i <cha.size(); i ++)
-            System.out.println("X = "+cha.get(i).getX()+ " " + "Y = "+cha.get(i).getY());
-            
-           // boneco.pos_atual.setX(boneco.cha.peek().getX());
-           // boneco.pos_atual.setY(boneco.cha.peek().getY());
+                if (cha.get(i).getCusto() == 0 ) pronto = cha.get(i);
+        
+           while(pronto.getAnterior() != null){
+               System.out.println("Caminho percorrido X = " + pronto.getPos().getX() + " Y = " + pronto.getPos().getY());
+               pronto = pronto.getAnterior();
+           }*/
+               
+           
             
         
         

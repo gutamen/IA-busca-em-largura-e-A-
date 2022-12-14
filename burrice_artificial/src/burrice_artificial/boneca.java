@@ -7,6 +7,7 @@ package burrice_artificial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -24,6 +25,7 @@ public class boneca {
     }
     
     public Stack<posicao> cha;
+    private List<posistrela> percurso;
     
     public boneca(){
         this.cha = new Stack<>();
@@ -96,13 +98,14 @@ public class boneca {
         return cha;           
     }
     
-    List decisao(labirinto lab,posicao inicial,posicao _final){
+    List decisao(labirinto lab,int direcao, posicao inicial,posicao _final){
         posistrela comesso = new posistrela(null,inicial);
-        int i = 0;
+        int atual = 0;
         
         comesso.calCusto(_final);
-        List<posistrela> percurso = new ArrayList<posistrela>();
-        
+        comesso.setDirecao(direcao);
+        comesso.visitado = true;
+        percurso = new ArrayList<>();
         percurso.add(comesso);
         
         while(true){
@@ -110,41 +113,64 @@ public class boneca {
             posistrela dois;
             posistrela tres;
             posistrela cuatro;
-            
-            if((lab.pegaValorPos(lab.pegaPosAddX(percurso.get(i).getPos())) != 1)){
-                um = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+            //System.out.println("Drage eh um macaco");
+            if((lab.pegaValorPos(lab.pegaPosAddX(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 0){
+                um = new posistrela(percurso.get(atual),lab.pegaPosAddX(percurso.get(atual).getPos()));
                 um.calCusto(_final);
+                um.setDirecao(2);
                 percurso.add(um);
+                
             }
             
-            if((lab.pegaValorPos(lab.pegaPosSubX(percurso.get(i).getPos())) != 1)){
-                dois = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+            if((lab.pegaValorPos(lab.pegaPosSubX(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 2){
+                dois = new posistrela(percurso.get(atual),lab.pegaPosSubX(percurso.get(atual).getPos()));
                 dois.calCusto(_final);
+                dois.setDirecao(0);
                 percurso.add(dois);
+                
             }
             
-            if((lab.pegaValorPos(lab.pegaPosAddY(percurso.get(i).getPos())) != 1)){
-                tres = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+            if((lab.pegaValorPos(lab.pegaPosAddY(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 3){
+                tres = new posistrela(percurso.get(atual),lab.pegaPosAddY(percurso.get(atual).getPos()));
                 tres.calCusto(_final);
+                tres.setDirecao(1);
                 percurso.add(tres);
+                
             }
             
-            if((lab.pegaValorPos(lab.pegaPosSubY(percurso.get(i).getPos())) != 1)){
-                cuatro = new posistrela(percurso.get(i).getPos(),lab.pegaPosAddX(percurso.get(i).getPos()));
+            if((lab.pegaValorPos(lab.pegaPosSubY(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 1){
+                cuatro = new posistrela(percurso.get(atual),lab.pegaPosSubY(percurso.get(atual).getPos()));
                 cuatro.calCusto(_final);
+                cuatro.setDirecao(3);
                 percurso.add(cuatro);
+                
             }
             
-            for(int k = 0;k < percurso.size();k++){
-                double menor = Double.MAX_VALUE;
-                if(percurso.get(i).getCusto()<menor){
-                    i = k;
+            double menor = Double.MAX_VALUE;
+            for(int k = 0;k < percurso.size();k++){    
+                if(percurso.get(k).getCusto() < menor && !percurso.get(k).visitado){
+                    menor = percurso.get(k).getCusto();
+                    atual = k;
+                    System.out.println(atual);    
                 }
+            
+                System.out.println("Posi X = "+ percurso.get(k).getPos().getX() +"; Y = " + percurso.get(k).getPos().getY() + "; Custo = " + percurso.get(k).getCusto()  );    
             }
             
-            if(percurso.get(i).getCusto()==0)
-                break;
+            percurso.get(atual).visitado = true;
             
+            if(percurso.get(atual).getCusto()<=0)
+                break;
+            else System.out.println(percurso.get(atual).getCusto() + "\n");
+              
+            
+            //System.out.println(lab.pegaValorPos(lab.pegaPosSubY(percurso.get(atual).getPos())));
+            
+            try{
+             TimeUnit.SECONDS.sleep(1);
+            }
+            catch(Exception e)
+            {}
         }
         return percurso;
     }
