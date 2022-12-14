@@ -42,50 +42,56 @@ public class boneca {
     Stack decisao(labirinto lab,int last){
 
         if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
             posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
             this.cha.push(newpos);
             this.pos_atual.setX(this.pos_atual.getX()+1);
             System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
             
-            if(lab.pegaValorPos(pos_atual) == 2)
-                return cha;
+            
             
             decisao(lab,2);
         }
         
         if((lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) != 1)&&last!=2){
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
             posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
             this.cha.push(newpos);
             this.pos_atual.setX(this.pos_atual.getX()-1);
             System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
             
-            if(lab.pegaValorPos(pos_atual) == 2)
-                return cha;
+            
             
             
             decisao(lab,0);
         }
         
         if((lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) !=  1) && last!=3){
-            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
-            this.cha.push(newpos);
-            this.pos_atual.setY(this.pos_atual.getY()-1);
-            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
-            
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
            
+            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            this.cha.push(newpos);
+            this.pos_atual.setY(this.pos_atual.getY()+1);
+            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            
+            
+            
             decisao(lab,1);
         }
         
         if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
+            
             posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
             this.cha.push(newpos);
             this.pos_atual.setY(this.pos_atual.getY()-1);
             System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
             
-            if(lab.pegaValorPos(pos_atual) == 2)
-                return cha;
+            
             
             decisao(lab,3);
         }

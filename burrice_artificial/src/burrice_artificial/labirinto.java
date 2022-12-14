@@ -19,9 +19,9 @@ public class labirinto {
        
         if(pos == null)
             return 1;
-        if( pos.getX() >= this.posicoes[0].length || pos.getX()<0)
+        if( pos.getX() > this.posicoes[0].length || pos.getX()<0)
             return 1;
-        else if( pos.getY() >= this.posicoes.length || pos.getY()<0)
+        else if( pos.getY() > this.posicoes.length || pos.getY()<0)
             return 1;
         
         /*System.out.println(pos.getY()+"  "+pos.getX());
