@@ -39,8 +39,8 @@ public class boneca {
         return quantos_andou;
     }
     
-    Stack decisao(labirinto lab,int last){
-
+    Stack decisao(labirinto lab,int last, posicao _pos){
+        pos_atual = _pos;
         if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
@@ -51,7 +51,7 @@ public class boneca {
             
             
             
-            decisao(lab,2);
+            decisao(lab,2, pos_atual);
         }
         
         if((lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) != 1)&&last!=2){
@@ -65,7 +65,7 @@ public class boneca {
             
             
             
-            decisao(lab,0);
+            decisao(lab,0,pos_atual);
         }
         
         if((lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) !=  1) && last!=3){
@@ -79,7 +79,7 @@ public class boneca {
             
             
             
-            decisao(lab,1);
+            decisao(lab,1,pos_atual);
         }
         
         if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
@@ -93,7 +93,7 @@ public class boneca {
             
             
             
-            decisao(lab,3);
+            decisao(lab,3,pos_atual);
         }
                    
         if(lab.pegaValorPos(pos_atual) != 2){
@@ -157,12 +157,13 @@ public class boneca {
                 if(percurso.get(k).getCusto() < menor && !percurso.get(k).visitado){
                     menor = percurso.get(k).getCusto();
                     atual = k;
-                    System.out.println(atual);    
+                    System.out.println(atual);   
+                    
                 }
             
                 System.out.println("Posi X = "+ percurso.get(k).getPos().getX() +"; Y = " + percurso.get(k).getPos().getY() + "; Custo = " + percurso.get(k).getCusto()  );    
             }
-            
+            this.pos_atual = percurso.get(atual).getPos();
             percurso.get(atual).visitado = true;
             
             if(percurso.get(atual).getCusto()<=0)

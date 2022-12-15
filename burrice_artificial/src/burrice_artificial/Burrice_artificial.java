@@ -20,13 +20,13 @@ public class Burrice_artificial {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        boneca boneco = new boneca();
-        boneco.pos_atual.setX(3);
-        boneco.pos_atual.setY(4);
-
         
+
+        grafico tela;
         
         labirinto lab = new labirinto();
+        
+        
         
         for (int[] posicoe : lab.posicoes) {
             for (int j = 0; j<lab.posicoes[0].length; j++) {
@@ -36,26 +36,31 @@ public class Burrice_artificial {
         }
                 
         
-      
-     
-           Stack<posicao> cha;
-           cha = boneco.decisao(lab,3);
-           while(!cha.empty()){
-               System.out.println("caminho X = " + cha.peek().getX() +" Y = " + cha.peek().getY());
-               cha.pop();
-           }
-           
-           
-           /*List<posistrela> cha;
-           cha = boneco.decisao(lab, 3 ,boneco.pos_atual,new posicao(0,4));
-           posistrela pronto = new posistrela();
-           for (int i = 0; i <cha.size(); i ++)
-                if (cha.get(i).getCusto() == 0 ) pronto = cha.get(i);
+        boneca boneco = new boneca();
+        boneco.pos_atual.setX(3);
+        boneco.pos_atual.setY(4);
         
-           while(pronto.getAnterior() != null){
-               System.out.println("Caminho percorrido X = " + pronto.getPos().getX() + " Y = " + pronto.getPos().getY());
-               pronto = pronto.getAnterior();
-           }*/
+        tela = new grafico(lab,boneco);
+        tela.desenha();
+     
+        /*Stack<posicao> cha;
+        cha = boneco.decisao(lab,3,boneco.getPos_atual());
+        while(!cha.empty()){
+           System.out.println("caminho X = " + cha.peek().getX() +" Y = " + cha.peek().getY());
+           cha.pop();
+        }*/
+           
+           
+        /*List<posistrela> cha;
+        cha = boneco.decisao(lab, 3 ,boneco.pos_atual,new posicao(0,4));
+        posistrela pronto = new posistrela();
+        for (int i = 0; i <cha.size(); i ++)
+            if (cha.get(i).getCusto() == 0 ) pronto = cha.get(i);
+        
+        while(pronto.getAnterior() != null){
+            System.out.println("Caminho percorrido X = " + pronto.getPos().getX() + " Y = " + pronto.getPos().getY());
+            pronto = pronto.getAnterior();
+        }*/
                
            
             
