@@ -40,7 +40,15 @@ public class boneca {
     }
     
     Stack decisao(labirinto lab,int last, posicao _pos){
+        
+        
         pos_atual = _pos;
+        
+        //atualiza tela ************************************
+        Burrice_artificial.tela.repaint();
+        try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+        //atualiza tela ************************************
+        
         if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
@@ -97,7 +105,13 @@ public class boneca {
         }
                    
         if(lab.pegaValorPos(pos_atual) != 2){
-            this.pos_atual = this.cha.pop(); 
+            this.pos_atual = this.cha.pop();
+            
+            //atualiza tela ************************************
+            Burrice_artificial.tela.repaint();
+            try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+            //atualiza tela ************************************
+            
             System.out.println("popou X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
         }
         
@@ -105,6 +119,8 @@ public class boneca {
     }
     
     List decisao(labirinto lab,int direcao, posicao inicial,posicao _final){
+        
+        try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
         posistrela comesso = new posistrela(null,inicial);
         int atual = 0;
         
@@ -163,7 +179,12 @@ public class boneca {
             
                 System.out.println("Posi X = "+ percurso.get(k).getPos().getX() +"; Y = " + percurso.get(k).getPos().getY() + "; Custo = " + percurso.get(k).getCusto()  );    
             }
+            
+            //atualiza tela**********
             this.pos_atual = percurso.get(atual).getPos();
+            Burrice_artificial.tela.repaint();
+            //***********************
+            
             percurso.get(atual).visitado = true;
             
             if(percurso.get(atual).getCusto()<=0)

@@ -15,6 +15,7 @@ import java.util.Stack;
 public class Burrice_artificial {
     
     boolean funcaoFechada = true; 
+    static grafico tela;
     /**
      * @param args the command line arguments
      */
@@ -22,7 +23,7 @@ public class Burrice_artificial {
         // TODO code application logic here
         
 
-        grafico tela;
+        
         
         labirinto lab = new labirinto();
         
@@ -43,12 +44,12 @@ public class Burrice_artificial {
         tela = new grafico(lab,boneco);
         tela.desenha();
      
-        /*Stack<posicao> cha;
+        Stack<posicao> cha;
         cha = boneco.decisao(lab,3,boneco.getPos_atual());
         while(!cha.empty()){
            System.out.println("caminho X = " + cha.peek().getX() +" Y = " + cha.peek().getY());
            cha.pop();
-        }*/
+        }
            
            
         /*List<posistrela> cha;
