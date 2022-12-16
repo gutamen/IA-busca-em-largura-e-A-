@@ -70,5 +70,18 @@ public class labirinto {
         return newpos;
     }
     
+    posicao posicaoFinal()
+    {
+        for(int i = 0; i < this.posicoes.length; i++){
+            for(int j = 0; j < this.posicoes[0].length; j++)
+            {
+                if(this.posicoes[i][j] == 2)
+                    return new posicao(i,j);
+            }
+        }
+        return null;
+        
+    }
+    
     
 } 

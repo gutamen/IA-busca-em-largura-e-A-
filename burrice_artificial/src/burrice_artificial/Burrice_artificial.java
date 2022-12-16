@@ -6,6 +6,11 @@ package burrice_artificial;
 
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 /**
@@ -16,6 +21,9 @@ public class Burrice_artificial {
     
     boolean funcaoFechada = true; 
     static grafico tela;
+    static painelInicio inicio;
+    static int tipo = 0;
+    static Semaphore espera = new Semaphore(0);
     /**
      * @param args the command line arguments
      */
@@ -26,34 +34,76 @@ public class Burrice_artificial {
         
         
         labirinto lab = new labirinto();
-        
-        
-        
-        for (int[] posicoe : lab.posicoes) {
-            for (int j = 0; j<lab.posicoes[0].length; j++) {
-                System.out.print("   " + posicoe[j]);
-            }
-            System.out.println("");
-        }
-                
-        
         boneca boneco = new boneca();
         boneco.pos_atual.setX(3);
         boneco.pos_atual.setY(4);
         
-        tela = new grafico(lab,boneco);
-        tela.desenha();
+        
+        /*for (int[] posicoe : lab.posicoes) {
+            for (int j = 0; j<lab.posicoes[0].length; j++) {
+                System.out.print("   " + posicoe[j]);
+            }
+            System.out.println("");
+        }*/
+        inicio = new painelInicio();   
+        inicio.inicia();
+  
+        
+        
+        try {
+            espera.acquire();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Burrice_artificial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        if(tipo == 1){
+            tela = new grafico(lab,boneco);
+            tela.desenha();
+            buscaAEstrela(lab,boneco);      
+        }else if(tipo == 2){
+            tela = new grafico(lab,boneco);
+            tela.desenha();
+            buscaProfundidade(lab,boneco);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
      
+        
+        
+       
+           
+        
+               
+           
+            
+        
+        
+    }
+    
+    public static void buscaProfundidade(labirinto lab, boneca boneco){
+        
         Stack<posicao> cha;
         cha = boneco.decisao(lab,3,boneco.getPos_atual());
         while(!cha.empty()){
            System.out.println("caminho X = " + cha.peek().getX() +" Y = " + cha.peek().getY());
            cha.pop();
         }
-           
-           
-        /*List<posistrela> cha;
-        cha = boneco.decisao(lab, 3 ,boneco.pos_atual,new posicao(0,4));
+    }
+    
+    public static void buscaAEstrela(labirinto lab, boneca boneco){
+        
+        
+        
+        
+        List<posistrela> cha;
+        cha = boneco.decisao(lab, 3 ,boneco.pos_atual,lab.posicaoFinal());
         posistrela pronto = new posistrela();
         for (int i = 0; i <cha.size(); i ++)
             if (cha.get(i).getCusto() == 0 ) pronto = cha.get(i);
@@ -61,12 +111,7 @@ public class Burrice_artificial {
         while(pronto.getAnterior() != null){
             System.out.println("Caminho percorrido X = " + pronto.getPos().getX() + " Y = " + pronto.getPos().getY());
             pronto = pronto.getAnterior();
-        }*/
-               
-           
-            
-        
-        
+        }
     }
     
     

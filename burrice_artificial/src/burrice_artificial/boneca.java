@@ -62,6 +62,20 @@ public class boneca {
             decisao(lab,2, pos_atual);
         }
         
+        if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
+            if(lab.pegaValorPos(pos_atual) == 2)
+                return cha;
+            
+            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            this.cha.push(newpos);
+            this.pos_atual.setY(this.pos_atual.getY()-1);
+            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            
+            
+            
+            decisao(lab,3,pos_atual);
+        }
+        
         if((lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) != 1)&&last!=2){
             if(lab.pegaValorPos(pos_atual) == 2)
                 return cha;
@@ -90,19 +104,7 @@ public class boneca {
             decisao(lab,1,pos_atual);
         }
         
-        if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
-            if(lab.pegaValorPos(pos_atual) == 2)
-                return cha;
-            
-            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
-            this.cha.push(newpos);
-            this.pos_atual.setY(this.pos_atual.getY()-1);
-            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
-            
-            
-            
-            decisao(lab,3,pos_atual);
-        }
+        
                    
         if(lab.pegaValorPos(pos_atual) != 2){
             this.pos_atual = this.cha.pop();

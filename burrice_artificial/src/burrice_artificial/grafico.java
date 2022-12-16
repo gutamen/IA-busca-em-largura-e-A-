@@ -19,12 +19,12 @@ import java.util.logging.Logger;
   
 //Extends JPanel class  
 public class grafico extends JPanel{  
-    //initialize coordinates  
-    int[] cord = {65, 20, 40, 80};  
+    
+    
     int larguraLab, alturaLab;
     static labirinto lab;
     static boneca boneco;
-   
+    static JFrame Tela;
     
     public static int cont = 0;
 public grafico(labirinto _lab, boneca _boneco){
@@ -34,6 +34,7 @@ public grafico(labirinto _lab, boneca _boneco){
     this.boneco = _boneco;
 }
 
+    @Override
     protected void paintComponent(Graphics grf){  
         //create instance of the Graphics to use its methods  
         super.paintComponent(grf);  
@@ -63,37 +64,27 @@ public grafico(labirinto _lab, boneca _boneco){
                 larguraQuad, alturaQuad);
 
         
-        //find value of x and scale to plot points  
-        double scaley = (double)(height/20);  
-        double scalex = (double)(width/20);
         
         
         
         
     }  
       
-    //create getMax() method to find maximum value  
-    private int getMax(){  
-        int max = -Integer.MAX_VALUE;  
-        for(int i=0; i<cord.length; i++){  
-            if(cord[i]>max)  
-                max = cord[i];  
-             
-        }  
-        return max;  
-    }         
+        
       
     // funcao desenhar  
     public void desenha(){  
          
-        JFrame Tela = new JFrame();
-        //System.out.println(boneco.getPos_atual().getX() + " " + boneco.getPos_atual().getY() );
+        Tela = new JFrame();
         Tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
         Tela.add(this);  
         Tela.setSize(1000, 700);  
         Tela.setLocation(200, 10);  
         Tela.setVisible(true); 
         
+        
+        
+            
         
     }  
     
