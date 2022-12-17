@@ -10,6 +10,7 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -35,16 +36,12 @@ public class Burrice_artificial {
         
         labirinto lab = new labirinto();
         boneca boneco = new boneca();
-        boneco.pos_atual.setX(3);
-        boneco.pos_atual.setY(4);
+        boneco.setPos_atual(lab.posicaoInicial());
+       
         
         
-        /*for (int[] posicoe : lab.posicoes) {
-            for (int j = 0; j<lab.posicoes[0].length; j++) {
-                System.out.print("   " + posicoe[j]);
-            }
-            System.out.println("");
-        }*/
+        
+        
         inicio = new painelInicio();   
         inicio.inicia();
   
@@ -60,30 +57,17 @@ public class Burrice_artificial {
         if(tipo == 1){
             tela = new grafico(lab,boneco);
             tela.desenha();
-            buscaAEstrela(lab,boneco);      
+            buscaAEstrela(lab,boneco); 
+            JOptionPane.showMessageDialog(tela, "Drage é um MACACO");
+            grafico.Tela.dispose();
+            
         }else if(tipo == 2){
             tela = new grafico(lab,boneco);
             tela.desenha();
             buscaProfundidade(lab,boneco);
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-     
-        
-        
-       
-           
-        
-               
-           
             
-        
+        }
+          
         
     }
     

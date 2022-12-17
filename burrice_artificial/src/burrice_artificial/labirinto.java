@@ -13,7 +13,7 @@ public class labirinto {
                                {1,0,0,0,0,1,1},
                                {1,0,1,1,1,0,1},
                                {1,0,0,0,0,0,1},
-                               {1,1,1,0,1,1,1}};
+                               {1,1,1,4,1,1,1}};
 
     int pegaValorPos(posicao pos){
        
@@ -76,6 +76,19 @@ public class labirinto {
             for(int j = 0; j < this.posicoes[0].length; j++)
             {
                 if(this.posicoes[i][j] == 2)
+                    return new posicao(i,j);
+            }
+        }
+        return null;
+        
+    }
+    
+    posicao posicaoInicial()
+    {
+        for(int i = 0; i < this.posicoes.length; i++){
+            for(int j = 0; j < this.posicoes[0].length; j++)
+            {
+                if(this.posicoes[i][j] == 4)
                     return new posicao(i,j);
             }
         }

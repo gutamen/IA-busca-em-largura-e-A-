@@ -55,7 +55,11 @@ public grafico(labirinto _lab, boneca _boneco){
             for(int j = 0; j < this.larguraLab; j++){
                 if(lab.posicoes[i][j] == 1)
                     graph.fillRect((j)*larguraQuad, (i)*alturaQuad, larguraQuad, alturaQuad);
-                    
+                if(lab.posicoes[i][j] == 2){
+                    graph.setPaint(Color.CYAN);
+                    graph.fillOval(((j)*larguraQuad)+larguraQuad/4, ((i)*alturaQuad)+alturaQuad/4, larguraQuad-larguraQuad/2, alturaQuad-alturaQuad/2);
+                    graph.setPaint(Color.BLACK); 
+                }
             }
         }
         graph.setPaint(Color.PINK);
