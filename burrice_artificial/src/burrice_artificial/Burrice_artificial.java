@@ -58,13 +58,15 @@ public class Burrice_artificial {
             tela = new grafico(lab,boneco);
             tela.desenha();
             buscaAEstrela(lab,boneco); 
-            JOptionPane.showMessageDialog(tela, "Drage é um MACACO");
+            JOptionPane.showMessageDialog(tela, "Encontrou o Final");
             grafico.Tela.dispose();
             
         }else if(tipo == 2){
             tela = new grafico(lab,boneco);
             tela.desenha();
             buscaProfundidade(lab,boneco);
+            JOptionPane.showMessageDialog(tela, "Encontrou o Final");
+            grafico.Tela.dispose();
             
         }
           

@@ -24,6 +24,7 @@ public class boneca {
         this.pos_atual = pos_atual;
     }
     
+    static private long time = 200;
     public Stack<posicao> cha;
     private List<posistrela> percurso;
     
@@ -46,7 +47,7 @@ public class boneca {
         
         //atualiza tela ************************************
         Burrice_artificial.tela.repaint();
-        try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+        try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
         //atualiza tela ************************************
         
         if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
@@ -111,7 +112,7 @@ public class boneca {
             
             //atualiza tela ************************************
             Burrice_artificial.tela.repaint();
-            try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+            try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
             //atualiza tela ************************************
             
             System.out.println("popou X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
@@ -122,7 +123,7 @@ public class boneca {
     
     List decisao(labirinto lab,int direcao, posicao inicial,posicao _final){
         
-        try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+        try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
         posistrela comesso = new posistrela(null,inicial);
         int atual = 0;
         
@@ -196,11 +197,7 @@ public class boneca {
             
             //System.out.println(lab.pegaValorPos(lab.pegaPosSubY(percurso.get(atual).getPos())));
             
-            try{
-             TimeUnit.SECONDS.sleep(1);
-            }
-            catch(Exception e)
-            {}
+            try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
         }
         return percurso;
     }
