@@ -34,7 +34,9 @@ public class boneca {
         
     }
  
-   
+   public static void setTime(int time){
+       boneca.time = time;
+   }
     int explora_profundidade(){
         int quantos_andou=0;      
         return quantos_andou;

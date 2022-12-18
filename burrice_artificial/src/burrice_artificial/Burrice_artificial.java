@@ -4,14 +4,14 @@
  */
 package burrice_artificial;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 
 /**
@@ -25,6 +25,7 @@ public class Burrice_artificial {
     static painelInicio inicio;
     static int tipo = 0;
     static Semaphore espera = new Semaphore(0);
+    
     /**
      * @param args the command line arguments
      */
@@ -33,12 +34,12 @@ public class Burrice_artificial {
         
 
         
-        
         labirinto lab = new labirinto();
         boneca boneco = new boneca();
         boneco.setPos_atual(lab.posicaoInicial());
        
         
+       
         
         
         
@@ -57,15 +58,19 @@ public class Burrice_artificial {
         if(tipo == 1){
             tela = new grafico(lab,boneco);
             tela.desenha();
+            grafico.Tela.setTitle("Busca A*");
             buscaAEstrela(lab,boneco); 
-            JOptionPane.showMessageDialog(tela, "Encontrou o Final");
+            
+            
+            JOptionPane.showMessageDialog(tela, "Encontrou o Final","Finalização",JOptionPane.INFORMATION_MESSAGE);
             grafico.Tela.dispose();
             
         }else if(tipo == 2){
             tela = new grafico(lab,boneco);
             tela.desenha();
+            grafico.Tela.setTitle("Busca Profundidade");
             buscaProfundidade(lab,boneco);
-            JOptionPane.showMessageDialog(tela, "Encontrou o Final");
+            JOptionPane.showMessageDialog(tela, "Encontrou o Final","Finalização",JOptionPane.INFORMATION_MESSAGE);
             grafico.Tela.dispose();
             
         }
@@ -99,6 +104,9 @@ public class Burrice_artificial {
             pronto = pronto.getAnterior();
         }
     }
+    
+    
+ 
     
     
 }
