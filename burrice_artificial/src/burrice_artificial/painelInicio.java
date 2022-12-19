@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,11 +19,14 @@ import java.util.stream.Stream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -41,6 +45,8 @@ private JFileChooser selecionaLab;
 
 
 public painelInicio(){
+    UIManager.put("FileChooser.cancelButtonText", "Cancelar");
+    UIManager.put("FileChooser.cancelButtonToolTipText", "Cancela a Seleção");
     this.iniciaAistrela = new JButton("Trabalhar com A-Estrela");
     this.iniciaProfundidade = new JButton("Trabalhar com Busca em Profundidade");
     this.temporizador = new JSpinner(new SpinnerNumberModel(200,100,2000,100));
@@ -148,6 +154,18 @@ public painelInicio(){
         
         if(e.getSource() == escolheArquivo)
         {   
+            int[][] newMatrix;
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivo de Texto", "txt", "text");
+            selecionaLab.setFileFilter(filter);
+            selecionaLab.setDialogTitle("Selecione o Labirinto");
+            selecionaLab.setApproveButtonText("Selecionar");
+            selecionaLab.setApproveButtonToolTipText("Somente Arquivos de Texto");
+            selecionaLab.setAcceptAllFileFilterUsed(false);
+            selecionaLab.setDragEnabled(false);
+            selecionaLab.setMultiSelectionEnabled(false);
+            
+            
+            
             
             int returnVal = selecionaLab.showOpenDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -159,12 +177,12 @@ public painelInicio(){
                     Logger.getLogger(painelInicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 char[] matrixConverter = null;
-                if(!data.isEmpty()) matrixConverter = data.toCharArray();
+                if(data != null) matrixConverter = data.toCharArray();
                 
                 int copier = 0;
                 int copierLine = 0;
                 int matrixHeight = 0;
-                int CopierAux = 0;
+                int copierAux = 0;
                 int temQuatro = 0;
                 int temDois = 0;
                 
@@ -176,29 +194,86 @@ public painelInicio(){
                 }
                 
                 for(int i = 0; i < matrixConverter.length; i++){
-                    if(matrixConverter.length == 10)
+                    if(matrixConverter[i] == 10)
                        matrixHeight++; 
                 }
                 
-                int[][] newMatrix = new int[matrixHeight][copierLine];
-                //System.out.println(copierLine);
+                newMatrix = new int[matrixHeight+1][copierLine];
+               
                    
-                     
-                /*while(copier< matrixConverter.length){
-                    while(copier < matrixConverter.length && matrixConverter[copier] != 10)
+                 
+                matrixHeight = 0;
+                while(copier< matrixConverter.length){
+                    
+                    
+                    if(matrixConverter[copier] == 48 || matrixConverter[copier] == 49 || matrixConverter[copier] == 52 || matrixConverter[copier] == 50)
                     {
-                        System.out.print(matrixConverter[copier]);
-                        copier++;
+                        /*System.out.println(matrixHeight);
+                        System.out.println(copierAux);*/
                         
-                    } 
+                        newMatrix[matrixHeight][copierAux] = matrixConverter[copier] - 48;
+                        
+                        
+                        if(newMatrix[matrixHeight][copierAux] == 2){
+                            temDois++;
+                        }else if(temDois > 1){
+                            JOptionPane.showMessageDialog(this, "Muitas Saídas\n Retorna a Matriz padrão","Erro",JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        
+                        if(newMatrix[matrixHeight][copierAux] == 4){
+                            temQuatro++;
+                        }else if(temQuatro > 1){
+                            JOptionPane.showMessageDialog(this, "Muitas Entradas\n Retorna a Matriz padrão","Erro",JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        
+                        copierAux++;
+                        
+                    }else if(copierAux > copierLine){
+                        JOptionPane.showMessageDialog(this, "Formato de Matriz Incorreto\n Retorna a Matriz padrão","Erro",JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }else if(copierLine == newMatrix[0].length && matrixConverter[copier] == 10){
+                        matrixHeight++;
+                        copierAux = 0;
+                    }
+                        
+                    
                     copier++;
                     
-                }*/
+                }
+                
+                if(temQuatro == 0 || temDois == 0){
+                    JOptionPane.showMessageDialog(this, "Formato de Matriz falta entrada ou saída\n Retorna a Matriz padrão","Erro",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                
                
-                
-                
-                
+               copierAux = 0;
+               for(int i = 0; i <= newMatrix[0].length; i++)
+               {
+                   if(i < newMatrix[0].length){
+                       if(newMatrix[newMatrix.length-1][i] != 0 ){
+                           copierAux++;
+                       }
+                   }else if(copierAux == 0){
+                       copierAux = -1;
+                   }
+                   
+               }
+              
+               if(copierAux == -1){
+                    int[][] newnewMatrix = new int[newMatrix.length-1][newMatrix[0].length];
+                    System.arraycopy(newMatrix, 0, newnewMatrix, 0, newMatrix.length-1);
+                    Burrice_artificial.lab.posicoes = newnewMatrix;
+                    Burrice_artificial.boneco.setPos_atual(Burrice_artificial.lab.posicaoInicial());
+                    return;
+               }
+               
+               System.out.println(newMatrix.length);
+               Burrice_artificial.lab.posicoes = newMatrix;
+               Burrice_artificial.boneco.setPos_atual(Burrice_artificial.lab.posicaoInicial());
+                     
             } 
             
         }

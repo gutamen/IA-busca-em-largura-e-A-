@@ -25,6 +25,8 @@ public class Burrice_artificial {
     static painelInicio inicio;
     static int tipo = 0;
     static Semaphore espera = new Semaphore(0);
+    static labirinto lab;
+    static boneca boneco;
     
     /**
      * @param args the command line arguments
@@ -34,8 +36,8 @@ public class Burrice_artificial {
         
 
         
-        labirinto lab = new labirinto();
-        boneca boneco = new boneca();
+        lab = new labirinto();
+        boneco = new boneca();
         boneco.setPos_atual(lab.posicaoInicial());
        
         
