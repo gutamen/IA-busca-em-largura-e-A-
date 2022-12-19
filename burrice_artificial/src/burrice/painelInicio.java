@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package burrice_artificial;
+package burrice;
 
 import java.awt.Font;
 import static java.awt.Font.MONOSPACED;
@@ -11,11 +11,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.HashSet;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -129,9 +126,9 @@ public painelInicio(){
             this.removeAll();
             
             
-            Burrice_artificial.tipo = 1;
+            burriceArtificial.tipo = 1;
             
-            Burrice_artificial.espera.release();
+            burriceArtificial.espera.release();
             
             return;
             
@@ -144,9 +141,9 @@ public painelInicio(){
             this.removeAll();
             
             
-            Burrice_artificial.tipo = 2;
+            burriceArtificial.tipo = 2;
             
-            Burrice_artificial.espera.release();
+            burriceArtificial.espera.release();
             
             return;
             
@@ -265,14 +262,14 @@ public painelInicio(){
                if(copierAux == -1){
                     int[][] newnewMatrix = new int[newMatrix.length-1][newMatrix[0].length];
                     System.arraycopy(newMatrix, 0, newnewMatrix, 0, newMatrix.length-1);
-                    Burrice_artificial.lab.posicoes = newnewMatrix;
-                    Burrice_artificial.boneco.setPos_atual(Burrice_artificial.lab.posicaoInicial());
+                    burriceArtificial.lab.posicoes = newnewMatrix;
+                    burriceArtificial.boneco.setPos_atual(burriceArtificial.lab.posicaoInicial());
                     return;
                }
                
                System.out.println(newMatrix.length);
-               Burrice_artificial.lab.posicoes = newMatrix;
-               Burrice_artificial.boneco.setPos_atual(Burrice_artificial.lab.posicaoInicial());
+               burriceArtificial.lab.posicoes = newMatrix;
+               burriceArtificial.boneco.setPos_atual(burriceArtificial.lab.posicaoInicial());
                      
             } 
             

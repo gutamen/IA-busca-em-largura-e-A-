@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package burrice_artificial;
+package burrice;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Gustavo
  */
-public class Burrice_artificial {
+public class burriceArtificial {
     
     boolean funcaoFechada = true; 
     static grafico tela;
@@ -53,7 +53,7 @@ public class Burrice_artificial {
         try {
             espera.acquire();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Burrice_artificial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(burriceArtificial.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         

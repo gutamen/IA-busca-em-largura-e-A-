@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package burrice_artificial;
+package burrice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class boneca {
         pos_atual = _pos;
         
         //atualiza tela ************************************
-        Burrice_artificial.tela.repaint();
+        burriceArtificial.tela.repaint();
         try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
         //atualiza tela ************************************
         
@@ -113,7 +113,7 @@ public class boneca {
             this.pos_atual = this.cha.pop();
             
             //atualiza tela ************************************
-            Burrice_artificial.tela.repaint();
+            burriceArtificial.tela.repaint();
             try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
             //atualiza tela ************************************
             
@@ -187,7 +187,7 @@ public class boneca {
             
             //atualiza tela**********
             this.pos_atual = percurso.get(atual).getPos();
-            Burrice_artificial.tela.repaint();
+            burriceArtificial.tela.repaint();
             //***********************
             
             percurso.get(atual).visitado = true;
