@@ -46,7 +46,7 @@ public painelInicio(){
     UIManager.put("FileChooser.cancelButtonToolTipText", "Cancela a Seleção");
     this.iniciaAistrela = new JButton("Trabalhar com A-Estrela");
     this.iniciaProfundidade = new JButton("Trabalhar com Busca em Profundidade");
-    this.temporizador = new JSpinner(new SpinnerNumberModel(200,0,2000,100));
+    this.temporizador = new JSpinner(new SpinnerNumberModel(200,0,2000,10));
     this.fundo = new JPanel();
     this.spinnerText = new JTextField("Tempo de Execução");
     this.spinnerTextTimeType = new JTextField("ms");

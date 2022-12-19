@@ -1,0 +1,7 @@
+JDK >= 19
+
+Abrir o terminal onde está a pasta burrice
+
+javac .\burrice\*.java
+
+java burrice.burriceArtificial
