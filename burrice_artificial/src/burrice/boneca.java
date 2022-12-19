@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +29,7 @@ public class boneca {
     
     static private long time = 200;
     public Stack<posicao> cha;
-    private List<posistrela> percurso;
+    private ArrayList<posistrela> percurso;
     
     
     public boneca(){
@@ -182,27 +184,25 @@ public class boneca {
         percurso.add(comesso);
         
         while(true){
-            posistrela um;
-            posistrela dois;
-            posistrela tres;
-            posistrela cuatro;
+            posistrela um = null;
+            posistrela dois = null;
+            posistrela tres = null;
+            posistrela cuatro = null;
+            
+            Thread corredor1 = null;
+            Thread corredor2 = null;
+            Thread corredor3 = null;
+            Thread corredor4 = null;
+            
             //System.out.println("Drage eh um macaco");
             if((lab.pegaValorPos(lab.pegaPosAddX(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 0){
                 um = new posistrela(percurso.get(atual),lab.pegaPosAddX(percurso.get(atual).getPos()));
                 um.calCusto(_final);
                 um.setDirecao(2);
                 
-                int igual = 0;
-                for(int i = 0; i < percurso.size(); i++)
-                {
-                    if(percurso.get(i).getPos().getX() == um.getPos().getX() && percurso.get(i).getPos().getY() == um.getPos().getY()){
-                        igual = 1;
-                        break;
-                    }
-                        
-                }
-                if(igual == 0) percurso.add(um);
                 
+                corredor1 = new Thread(new forRunner(percurso, um));
+                corredor1.start();
                 
             }
             
@@ -211,17 +211,8 @@ public class boneca {
                 dois.calCusto(_final);
                 dois.setDirecao(0);
                 
-                int igual = 0;
-                for(int i = 0; i < percurso.size(); i++)
-                {
-                    if(percurso.get(i).getPos().getX() == dois.getPos().getX() && percurso.get(i).getPos().getY() == dois.getPos().getY()){
-                        igual = 1;
-                        break;
-                    }
-                        
-                }
-                if(igual == 0) percurso.add(dois);
-                
+                corredor2 = new Thread(new forRunner(percurso, dois));
+                corredor2.start();
             }
             
             if((lab.pegaValorPos(lab.pegaPosAddY(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 3){
@@ -229,17 +220,8 @@ public class boneca {
                 tres.calCusto(_final);
                 tres.setDirecao(1);
                 
-                int igual = 0;
-                for(int i = 0; i < percurso.size(); i++)
-                {
-                    if(percurso.get(i).getPos().getX() == tres.getPos().getX() && percurso.get(i).getPos().getY() == tres.getPos().getY()){
-                        igual = 1;
-                        break;
-                    }
-                        
-                }
-                if(igual == 0) percurso.add(tres);
-                
+                corredor3 = new Thread(new forRunner(percurso, tres));
+                corredor3.start();
             }
             
             if((lab.pegaValorPos(lab.pegaPosSubY(percurso.get(atual).getPos())) != 1) && percurso.get(atual).getDirecao() != 1){
@@ -247,18 +229,33 @@ public class boneca {
                 cuatro.calCusto(_final);
                 cuatro.setDirecao(3);
                 
-                int igual = 0;
-                for(int i = 0; i < percurso.size(); i++)
-                {
-                    if(percurso.get(i).getPos().getX() == cuatro.getPos().getX() && percurso.get(i).getPos().getY() == cuatro.getPos().getY()){
-                        igual = 1;
-                        break;
-                    }
-                        
-                }
-                if(igual == 0) percurso.add(cuatro);
                 
+                corredor4 = new Thread(new forRunner(percurso, cuatro));
+                corredor4.start();
             }
+            
+            try {
+                if(corredor1 != null)corredor1.join();
+                if(corredor2 != null)corredor2.join();
+                if(corredor3 != null)corredor3.join();
+                if(corredor4 != null)corredor4.join();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(boneca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+            /*if(um != null){
+                if(um.igual == 0) percurso.add(um);
+            }
+            if(dois !=null){
+                if(dois.igual == 0) percurso.add(dois);
+            }
+            
+            if(tres != null){
+                if(tres.igual == 0) percurso.add(tres);
+            }
+            if(cuatro != null){
+                if(cuatro.igual == 0) percurso.add(cuatro);
+            }*/
             
             double menor = Double.MAX_VALUE;
             for(int k = 0;k < percurso.size();k++){    

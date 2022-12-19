@@ -37,7 +37,7 @@ public class posistrela {
     private double custo = 0;
     private posistrela anterior;
     boolean visitado = false;
-
+    public int igual = -1;
     public int getDirecao() {
         return direcao;
     }
