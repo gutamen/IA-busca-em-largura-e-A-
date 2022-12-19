@@ -38,7 +38,7 @@ public class burriceArtificial {
         
         lab = new labirinto();
         boneco = new boneca();
-        boneco.setPos_atual(lab.posicaoInicial());
+        boneco.setPosAtual(lab.posicaoInicial());
        
         
        
@@ -83,7 +83,7 @@ public class burriceArtificial {
     public static void buscaProfundidade(labirinto lab, boneca boneco){
         
         Stack<posicao> cha;
-        cha = boneco.decisao(lab,3,boneco.getPos_atual());
+        cha = boneco.decisao(lab,3,boneco.getPosAtual());
         while(!cha.empty()){
            System.out.println("caminho X = " + cha.peek().getX() +" Y = " + cha.peek().getY());
            cha.pop();
@@ -96,7 +96,7 @@ public class burriceArtificial {
         
         
         List<posistrela> cha;
-        cha = boneco.decisao(lab, 3 ,boneco.pos_atual,lab.posicaoFinal());
+        cha = boneco.decisao(lab, 3 ,boneco.posAtual,lab.posicaoFinal());
         posistrela pronto = new posistrela();
         for (int i = 0; i <cha.size(); i ++)
             if (cha.get(i).getCusto() == 0 ) pronto = cha.get(i);

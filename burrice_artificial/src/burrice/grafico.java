@@ -63,8 +63,8 @@ public grafico(labirinto _lab, boneca _boneco){
             }
         }
         graph.setPaint(Color.PINK);
-        graph.fillOval((boneco.getPos_atual().getX())*larguraQuad, 
-                (boneco.getPos_atual().getY())*alturaQuad, 
+        graph.fillOval((boneco.getPosAtual().getX())*larguraQuad, 
+                (boneco.getPosAtual().getY())*alturaQuad, 
                 larguraQuad, alturaQuad);
 
         

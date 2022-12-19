@@ -46,7 +46,7 @@ public painelInicio(){
     UIManager.put("FileChooser.cancelButtonToolTipText", "Cancela a Seleção");
     this.iniciaAistrela = new JButton("Trabalhar com A-Estrela");
     this.iniciaProfundidade = new JButton("Trabalhar com Busca em Profundidade");
-    this.temporizador = new JSpinner(new SpinnerNumberModel(200,100,2000,100));
+    this.temporizador = new JSpinner(new SpinnerNumberModel(200,0,2000,100));
     this.fundo = new JPanel();
     this.spinnerText = new JTextField("Tempo de Execução");
     this.spinnerTextTimeType = new JTextField("ms");
@@ -263,13 +263,13 @@ public painelInicio(){
                     int[][] newnewMatrix = new int[newMatrix.length-1][newMatrix[0].length];
                     System.arraycopy(newMatrix, 0, newnewMatrix, 0, newMatrix.length-1);
                     burriceArtificial.lab.posicoes = newnewMatrix;
-                    burriceArtificial.boneco.setPos_atual(burriceArtificial.lab.posicaoInicial());
+                    burriceArtificial.boneco.setPosAtual(burriceArtificial.lab.posicaoInicial());
                     return;
                }
                
                System.out.println(newMatrix.length);
                burriceArtificial.lab.posicoes = newMatrix;
-               burriceArtificial.boneco.setPos_atual(burriceArtificial.lab.posicaoInicial());
+               burriceArtificial.boneco.setPosAtual(burriceArtificial.lab.posicaoInicial());
                      
             } 
             

@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit;
  * @author Gustavo
  */
 public class boneca {
-    public posicao pos_atual;
+    public posicao posAtual;
 
-    public posicao getPos_atual() {
-        return pos_atual;
+    public posicao getPosAtual() {
+        return posAtual;
     }
 
-    public void setPos_atual(posicao pos_atual) {
-        this.pos_atual = pos_atual;
+    public void setPosAtual(posicao posAtual) {
+        this.posAtual = posAtual;
     }
     
     static private long time = 200;
@@ -30,94 +30,91 @@ public class boneca {
     
     public boneca(){
         this.cha = new Stack<>();
-        this.pos_atual = new posicao(0,0);
+        this.posAtual = new posicao(0,0);
         
     }
  
    public static void setTime(int time){
        boneca.time = time;
    }
-    int explora_profundidade(){
-        int quantos_andou=0;      
-        return quantos_andou;
-    }
+
     
     Stack decisao(labirinto lab,int last, posicao _pos){
         
         
-        pos_atual = _pos;
+        posAtual = _pos;
         
         //atualiza tela ************************************
         burriceArtificial.tela.repaint();
         try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
         //atualiza tela ************************************
         
-        if((lab.pegaValorPos(lab.pegaPosAddX(this.pos_atual)) != 1) && last!=0){
-            if(lab.pegaValorPos(pos_atual) == 2)
+        if((lab.pegaValorPos(lab.pegaPosAddX(this.posAtual)) != 1) && last!=0){
+            if(lab.pegaValorPos(posAtual) == 2)
                 return cha;
-            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            posicao newpos = new posicao(this.posAtual.getY(),this.posAtual.getX());
             this.cha.push(newpos);
-            this.pos_atual.setX(this.pos_atual.getX()+1);
-            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            this.posAtual.setX(this.posAtual.getX()+1);
+            System.out.println("X atual = " + this.posAtual.getX() + " Y atual = " + this.posAtual.getY());
             
             
             
-            decisao(lab,2, pos_atual);
+            decisao(lab,2, posAtual);
         }
         
-        if((lab.pegaValorPos(lab.pegaPosSubY(this.pos_atual)) != 1 ) && last != 1){
-            if(lab.pegaValorPos(pos_atual) == 2)
+        if((lab.pegaValorPos(lab.pegaPosSubY(this.posAtual)) != 1 ) && last != 1){
+            if(lab.pegaValorPos(posAtual) == 2)
                 return cha;
             
-            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            posicao newpos = new posicao(this.posAtual.getY(),this.posAtual.getX());
             this.cha.push(newpos);
-            this.pos_atual.setY(this.pos_atual.getY()-1);
-            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            this.posAtual.setY(this.posAtual.getY()-1);
+            System.out.println("X atual = " + this.posAtual.getX() + " Y atual = " + this.posAtual.getY());
             
             
             
-            decisao(lab,3,pos_atual);
+            decisao(lab,3,posAtual);
         }
         
-        if((lab.pegaValorPos(lab.pegaPosSubX(this.pos_atual)) != 1)&&last!=2){
-            if(lab.pegaValorPos(pos_atual) == 2)
+        if((lab.pegaValorPos(lab.pegaPosSubX(this.posAtual)) != 1)&&last!=2){
+            if(lab.pegaValorPos(posAtual) == 2)
                 return cha;
-            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            posicao newpos = new posicao(this.posAtual.getY(),this.posAtual.getX());
             this.cha.push(newpos);
-            this.pos_atual.setX(this.pos_atual.getX()-1);
-            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            this.posAtual.setX(this.posAtual.getX()-1);
+            System.out.println("X atual = " + this.posAtual.getX() + " Y atual = " + this.posAtual.getY());
             
             
             
             
-            decisao(lab,0,pos_atual);
+            decisao(lab,0,posAtual);
         }
         
-        if((lab.pegaValorPos(lab.pegaPosAddY(this.pos_atual)) !=  1) && last!=3){
-            if(lab.pegaValorPos(pos_atual) == 2)
+        if((lab.pegaValorPos(lab.pegaPosAddY(this.posAtual)) !=  1) && last!=3){
+            if(lab.pegaValorPos(posAtual) == 2)
                 return cha;
            
-            posicao newpos = new posicao(this.pos_atual.getY(),this.pos_atual.getX());
+            posicao newpos = new posicao(this.posAtual.getY(),this.posAtual.getX());
             this.cha.push(newpos);
-            this.pos_atual.setY(this.pos_atual.getY()+1);
-            System.out.println("X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            this.posAtual.setY(this.posAtual.getY()+1);
+            System.out.println("X atual = " + this.posAtual.getX() + " Y atual = " + this.posAtual.getY());
             
             
             
-            decisao(lab,1,pos_atual);
+            decisao(lab,1,posAtual);
         }
         
         
                    
-        if(lab.pegaValorPos(pos_atual) != 2){
-            this.pos_atual = this.cha.pop();
+        if(lab.pegaValorPos(posAtual) != 2){
+            this.posAtual = this.cha.pop();
             
             //atualiza tela ************************************
             burriceArtificial.tela.repaint();
             try{TimeUnit.MILLISECONDS.sleep(time);}catch(Exception e){}
             //atualiza tela ************************************
             
-            System.out.println("popou X atual = " + this.pos_atual.getX() + " Y atual = " + this.pos_atual.getY());
+            System.out.println("popou X atual = " + this.posAtual.getX() + " Y atual = " + this.posAtual.getY());
         }
         
         return cha;           
@@ -186,7 +183,7 @@ public class boneca {
             }
             
             //atualiza tela**********
-            this.pos_atual = percurso.get(atual).getPos();
+            this.posAtual = percurso.get(atual).getPos();
             burriceArtificial.tela.repaint();
             //***********************
             
